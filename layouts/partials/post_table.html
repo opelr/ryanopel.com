@@ -12,12 +12,7 @@
       <td class="title">{{ if $hasBody }}<a href="{{ if eq $section "snippets" }}/snippets/#{{ .File.ContentBaseName }}{{ else }}{{ .RelPermalink }}{{ end }}">{{ .Title }}</a>{{ else }}{{ .Title }}{{ end }}</td>
       {{- if $reading }}
       <td class="author">{{ .Params.author }}</td>
-      <td class="rating">
-        {{- with .Params.rating }}
-          {{- $r := float . }}{{ $full := int (math.Floor $r) }}
-          {{- range seq $full }}★{{ end }}{{ if gt (sub $r (float $full)) 0.0 }}½{{ end }}
-        {{- end -}}
-      </td>
+      <td class="rating">{{ partial "stars.html" .Params.rating }}</td>
       {{- end }}
       <td class="date">{{ .Date.Format "2006-01-02" }}</td>
     </tr>

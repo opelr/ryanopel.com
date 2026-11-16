@@ -5,6 +5,10 @@
 {{ $author := or .Params.author (index (or .Site.Params.author dict) .Section) }}
 {{ $date := "" }}
 {{ if .Params.date }}{{ $date = .Date.Format "2006-01-02" }}{{ else }}{{ with .Lastmod }}{{ $date = .Format "2006-01-02" }}{{ end }}{{ end }}
-<p class="post-meta">{{ with $author }}{{ . }}{{ if $date }} · {{ end }}{{ end }}{{ $date }}</p>
+{{ $parts := slice }}
+{{ with $author }}{{ $parts = $parts | append (. | htmlEscape) }}{{ end }}
+{{ with .Params.rating }}{{ $parts = $parts | append (printf "<span class=\"rating\">%s</span>" (partial "stars.html" .)) }}{{ end }}
+{{ with $date }}{{ $parts = $parts | append . }}{{ end }}
+<p class="post-meta">{{ delimit $parts " · " | safeHTML }}</p>
 {{ end }}
 {{ end }}

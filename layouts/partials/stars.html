@@ -1,0 +1,5 @@
+{{- /* Renders a 0-5 rating (halves allowed) as ★ and ½. Arg: the rating. */ -}}
+{{- with . }}
+  {{- $r := float . }}{{ $full := int (math.Floor $r) }}
+  {{- range seq $full }}★{{ end }}{{ if gt (sub $r (float $full)) 0.0 }}½{{ end }}
+{{- end -}}
