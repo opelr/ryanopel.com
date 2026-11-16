@@ -1,0 +1,383 @@
+/* Layout and type modeled on macwright.com: one narrow column, nav to the
+   left on wide screens, tight rows, small dim dates. Color is kept to a few
+   accents (stars, selection, active menu item). */
+
+:root {
+    --bg: #fff8ea;
+    --text: #0e1a3a;
+    --text-dim: #5b6076;
+    --border: #0e1a3a;
+    --border-dim: rgba(14, 26, 58, .15);
+    --accent: #b44240;
+    --yellow: #fdb515;
+    --red: #e8432b;
+    --blue: #137ac2;
+    --hover: var(--red);
+    --content-width: 640px;
+}
+
+/* Reset */
+
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea,
+label {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+html {
+    background: var(--bg);
+}
+
+::selection {
+    background: var(--yellow);
+    color: var(--text);
+}
+
+/* Type */
+
+h1,
+h2,
+h3 {
+    margin: 0 0 .5rem;
+    line-height: 1.25;
+    letter-spacing: .005em;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+h2 {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+h3 {
+    margin-top: 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+p,
+ul,
+ol {
+    margin: 1rem 0;
+}
+
+ul,
+ol {
+    padding-left: 1.5rem;
+}
+
+li {
+    margin: 2px 0;
+}
+
+blockquote {
+    margin: 1rem 0;
+    padding: 0 1.25rem;
+    border-left: 2px solid var(--border);
+    color: var(--text-dim);
+}
+
+hr {
+    height: 0;
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid var(--border-dim);
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Hover color follows the section: red writing, blue reading, yellow snippets */
+
+body.reading { --hover: var(--blue); }
+body.snippets { --hover: var(--yellow); }
+
+.menu-writing,
+.section-heading.writing,
+.post-table.writing { --hover: var(--red); }
+
+.menu-reading,
+.section-heading.reading,
+.post-table.reading { --hover: var(--blue); }
+
+.menu-snippets,
+.section-heading.snippets,
+.post-table.snippets { --hover: var(--yellow); }
+
+a:hover {
+    text-decoration-color: color-mix(in srgb, var(--hover) 75%, var(--bg));
+    text-decoration-thickness: 3px;
+    text-underline-offset: 3px;
+}
+
+sup a {
+    text-decoration: none;
+}
+
+/* Code */
+
+pre,
+code {
+    font-size: .9em;
+}
+
+code {
+    padding: .1em .3em;
+    background: rgba(14, 26, 58, .06);
+}
+
+pre code {
+    display: block;
+    padding: .75rem 1rem;
+    overflow-x: auto;
+    border: 1px solid var(--border-dim);
+    background: none;
+    line-height: 1.5;
+}
+
+.footnotes {
+    font-size: .9em;
+}
+
+/* Layout: masthead floats to the left of the column on wide screens */
+
+.main {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: content-box;
+}
+
+.masthead {
+    position: absolute;
+    top: 40px;
+    right: 50%;
+    margin-right: calc(var(--content-width) / 2 + 20px);
+    letter-spacing: -.009em;
+}
+
+.masthead h1 {
+    margin: 0 0 .25em;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.6;
+}
+
+.masthead a,
+.menu a,
+.section-heading a,
+.post-table a {
+    text-decoration-line: none;
+}
+
+.masthead a:hover,
+.menu a:hover,
+.section-heading a:hover,
+.post-table a:hover {
+    text-decoration-line: underline;
+}
+
+.menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu li {
+    margin: 0;
+}
+
+.menu li.active a {
+    box-shadow: inset 0 -.45em 0 color-mix(in srgb, var(--hover) 45%, transparent);
+}
+
+/* Page header */
+
+.main .title h1 {
+    margin: 0 0 .5rem;
+}
+
+.main .title h1.page-title {
+    /* section pages: same size as the home page section headings */
+    margin: 0 0 .25rem;
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.6;
+}
+
+.subtitle {
+    margin: 0 0 .5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-dim);
+}
+
+.post-meta {
+    margin: 0 0 1.5rem;
+    font-size: .85rem;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Post body is set in a serif, like the reference */
+
+.body {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-size: 1.1rem;
+}
+
+/* Home */
+
+.section-heading {
+    margin: 1.75rem 0 .25rem;
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.6;
+}
+
+/* Post tables: no rules, tight rows, dim small dates */
+
+.post-table {
+    width: 100%;
+    margin: 0;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 2px;
+}
+
+.post-table td {
+    padding: 0 .5em 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.post-table td:last-child {
+    padding-right: 0;
+}
+
+.post-table .title a {
+    font-weight: 500;
+    letter-spacing: -.015em;
+}
+
+.post-table .author {
+    width: 30%;
+}
+
+.post-table .rating {
+    width: 5em;
+    color: var(--accent);
+}
+
+.post-table .date {
+    width: 6.5em;
+    text-align: right;
+    font-size: 90%;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.012em;
+    color: var(--text-dim);
+}
+
+.post-table tr.muted .title,
+.post-table tr.muted .author {
+    color: var(--text-dim);
+}
+
+/* Snippets: full text, newest first */
+
+.snippet {
+    margin: 0 0 2rem;
+}
+
+.snippet h3 {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.snippet time {
+    display: block;
+    font-size: .85rem;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+}
+
+.snippet .body p:first-child {
+    margin-top: .5rem;
+}
+
+.copyright {
+    text-align: center;
+}
+
+/* Narrow screens: masthead goes on top, nav runs inline */
+
+@media screen and (max-width: 1024px) {
+    .masthead {
+        position: static;
+        margin: 0;
+        padding: 20px max(20px, calc(50% - var(--content-width) / 2));
+        border-bottom: 1px solid var(--border);
+    }
+
+    .menu li {
+        display: inline;
+        margin-right: 1em;
+    }
+
+    .main {
+        padding-top: 30px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .post-table .author {
+        display: none;
+    }
+}

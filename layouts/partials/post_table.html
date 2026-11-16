@@ -1,0 +1,26 @@
+{{- /* Uniform post table. Args: ctx (page), section, limit (0 = all). Columns: title, [author], [rating], date. */ -}}
+{{- $section := .section -}}
+{{- $pages := where .ctx.Site.RegularPages "Section" $section -}}
+{{- $pages = sort $pages "Date" "desc" -}}
+{{- if gt .limit 0 }}{{ $pages = first .limit $pages }}{{ end -}}
+{{- $reading := eq $section "reading" -}}
+<table class="post-table {{ $section }}">
+  <tbody>
+  {{- range $pages }}
+    {{- $hasBody := or (gt .WordCount 0) (ne $section "reading") }}
+    <tr{{ if not $hasBody }} class="muted"{{ end }}>
+      <td class="title">{{ if $hasBody }}<a href="{{ if eq $section "snippets" }}/snippets/#{{ .File.ContentBaseName }}{{ else }}{{ .RelPermalink }}{{ end }}">{{ .Title }}</a>{{ else }}{{ .Title }}{{ end }}</td>
+      {{- if $reading }}
+      <td class="author">{{ .Params.author }}</td>
+      <td class="rating">
+        {{- with .Params.rating }}
+          {{- $r := float . }}{{ $full := int (math.Floor $r) }}
+          {{- range seq $full }}★{{ end }}{{ if gt (sub $r (float $full)) 0.0 }}½{{ end }}
+        {{- end -}}
+      </td>
+      {{- end }}
+      <td class="date">{{ .Date.Format "2006-01-02" }}</td>
+    </tr>
+  {{- end }}
+  </tbody>
+</table>

@@ -1,0 +1,62 @@
+baseURL: https://ryanopel.com/
+languageCode: en-us
+paginate: 5
+title: "Ryan Opel"
+pluralizeListTitles: false
+
+mainsections: []
+
+params:
+  DateFormat: "2006-01-02"
+
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  UseHugoToc: true
+
+  socialIcons:
+    - name: "github"
+      url: "https://github.com/opelr"
+    - name: "linkedin"
+      url: "https://www.linkedin.com/in/ryanopel/"
+
+menu:
+  main:
+    - identifier: writing
+      name: writing
+      url: /writing/
+      weight: 10
+    - identifier: reading
+      name: reading
+      url: /reading/
+      weight: 20
+    - identifier: snippets
+      name: snippets
+      url: /snippets/
+      weight: 25
+    - identifier: about
+      name: about
+      url: /about/
+      weight: 30
+
+permalinks:
+  page:
+    writing: /:year/:month/:slug/
+    reading: /:year/:month/:slug/
+  section:
+    writing: /writing/
+    reading: /reading/
+    snippets: /snippets/
+
+# module:
+#   imports:
+# - path: github.com/adityatelange/hugo-PaperMod
+# - path: github.com/yihui/hugo-ivy
+# - path: github.com/janraasch/hugo-bearblog
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

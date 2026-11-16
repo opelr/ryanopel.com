@@ -1,0 +1,9 @@
+<nav class="menu">
+  <ul>
+  {{ $currentPage := . }}
+  {{ range (default .Site.Menus.main (index .Site.Menus ($.Scratch.Get "section"))) }}
+  <li class="menu-{{ .Identifier }}{{ if eq .URL $currentPage.RelPermalink }} active{{ end }}"><a href="{{ .URL }}">{{ .Name | strings.Title }}</a></li>
+  {{ end }}
+  {{ partial "menu_extra.html" . }}
+  </ul>
+</nav>

@@ -1,0 +1,10 @@
+{{ partial "header.html" . }}
+
+{{ .Content }}
+
+{{ range slice "writing" "reading" "snippets" }}
+<h3 class="section-heading {{ . }}"><a href="/{{ . }}/">{{ . | title }}</a></h3>
+{{ partial "post_table.html" (dict "ctx" $ "section" . "limit" 5) }}
+{{ end }}
+
+{{ partial "footer.html" . }}

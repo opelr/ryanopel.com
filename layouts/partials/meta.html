@@ -1,0 +1,10 @@
+{{ if not .IsHome }}
+<h1{{ if not .IsPage }} class="page-title"{{ end }}>{{ .Title }}</h1>
+{{ with .Params.subtitle }}<h2 class="subtitle">{{ . }}</h2>{{ end }}
+{{ if .IsPage }}
+{{ $author := or .Params.author (index (or .Site.Params.author dict) .Section) }}
+{{ $date := "" }}
+{{ if .Params.date }}{{ $date = .Date.Format "2006-01-02" }}{{ else }}{{ with .Lastmod }}{{ $date = .Format "2006-01-02" }}{{ end }}{{ end }}
+<p class="post-meta">{{ with $author }}{{ . }}{{ if $date }} · {{ end }}{{ end }}{{ $date }}</p>
+{{ end }}
+{{ end }}

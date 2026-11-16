@@ -1,0 +1,17 @@
+{{ partial "header.html" . }}
+
+{{ .Content }}
+
+{{- if eq .Section "snippets" }}
+{{- range sort .Pages "Date" "desc" }}
+<section class="snippet" id="{{ .File.ContentBaseName }}">
+  <h3>{{ .Title }}</h3>
+  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+  <div class="body">{{ .Content }}</div>
+</section>
+{{- end }}
+{{- else }}
+{{ partial "post_table.html" (dict "ctx" . "section" .Section "limit" 0) }}
+{{- end }}
+
+{{ partial "footer.html" . }}
