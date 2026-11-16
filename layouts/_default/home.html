@@ -1,6 +1,6 @@
 {{ partial "header.html" . }}
 
-{{ .Content }}
+<div class="home-intro">{{ .Content }}</div>
 
 {{ range slice "writing" "reading" "snippets" }}
 <h3 class="section-heading {{ . }}"><a href="/{{ . }}/">{{ . | title }}</a></h3>

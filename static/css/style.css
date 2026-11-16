@@ -231,6 +231,26 @@ pre code {
     margin: 0;
 }
 
+.menu li.menu-social {
+    display: inline-block;
+}
+
+.menu-social a {
+    color: var(--text-dim);
+}
+
+.menu-social a:hover {
+    color: var(--hover);
+}
+
+.menu-social svg {
+    display: block;
+}
+
+.menu li.menu-social-first {
+    margin-top: 1.25rem;
+}
+
 .menu li.active a {
     box-shadow: inset 0 -.45em 0 color-mix(in srgb, var(--hover) 45%, transparent);
 }
@@ -275,6 +295,11 @@ pre code {
 }
 
 /* Home */
+
+/* intro paragraph aligns with the top of the masthead */
+.home-intro > :first-child {
+    margin-top: 0;
+}
 
 .section-heading {
     margin: 1.75rem 0 .25rem;
@@ -372,6 +397,19 @@ pre code {
     .menu li {
         display: inline;
         margin-right: 1em;
+    }
+
+    .menu li.menu-social {
+        margin-right: 1em;
+    }
+
+    .menu li.menu-social-first {
+        margin-top: 0;
+    }
+
+    .menu-social svg {
+        display: inline-block;
+        vertical-align: text-bottom;
     }
 
     .main {

@@ -4,4 +4,4 @@ title: "About"
 
 Hi, I'm Ryan.
 
-[Resume](/ryan_opel_resume.pdf)
+<a href="/ryan_opel_resume.pdf" target="_blank" rel="noopener">Resume</a>
