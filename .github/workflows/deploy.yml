@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main, master]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -17,27 +17,27 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "0.125.6"
           extended: true
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       # baseURL comes from hugo.yaml (https://ryanopel.com/). The resume PDF is
       # committed under static/, so `just update` (which copies ../resume) isn't needed here.
       - run: hugo --minify
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: public
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
